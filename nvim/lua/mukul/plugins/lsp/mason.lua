@@ -13,9 +13,15 @@ return {
 		-- import mason-lspconfig
 		local mason_lspconfig = require("mason-lspconfig")
 
+		-- import mason-tool-installer
 		local mason_tool_installer = require("mason-tool-installer")
 
+		-- import cmp-nvim-lsp plugin
+		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+		-- import lspconfig
 		local lspconfig = require("lspconfig")
+
 		-- enable mason and configure icons
 		mason.setup({
 			ui = {
@@ -37,11 +43,18 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
+				"ts_ls",
+				"html",
+				"cssls",
+				"tailwindcss",
+				"emmet_ls",
 				"stylua",
 				"ruff",
 				"sonarlint-language-server",
 			},
 		})
+
+		local capabilities = cmp_nvim_lsp.default_capabilities()
 
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
@@ -51,6 +64,7 @@ return {
 			["svelte"] = function()
 				-- configure svelte server
 				lspconfig["svelte"].setup({
+					capabilities = capabilities,
 					on_attach = function(client, bufnr)
 						vim.api.nvim_create_autocmd("BufWritePost", {
 							pattern = { "*.js", "*.ts" },
@@ -62,9 +76,26 @@ return {
 					end,
 				})
 			end,
+			["emmet_ls"] = function()
+				-- configure emmet language server
+				lspconfig["emmet_ls"].setup({
+					capabilities = capabilities,
+					filetypes = {
+						"html",
+						"typescriptreact",
+						"javascriptreact",
+						"css",
+						"sass",
+						"scss",
+						"less",
+						"svelte",
+					},
+				})
+			end,
 			["pyright"] = function()
 				-- configure pyright server
 				lspconfig["pyright"].setup({
+					capabilities = capabilities,
 					settings = {
 						python = {
 							analysis = {
@@ -80,6 +111,7 @@ return {
 			["lua_ls"] = function()
 				-- configure lua server (with special settings)
 				lspconfig["lua_ls"].setup({
+					capabilities = capabilities,
 					settings = {
 						Lua = {
 							-- make the language server recognize "vim" global
