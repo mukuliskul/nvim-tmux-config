@@ -13,13 +13,24 @@ return {
 
 		telescope.setup({
 			defaults = {
-				path_display = { "smart" },
+				-- path_display = { "smart" },
 				mappings = {
 					i = {
 						["<C-k>"] = actions.move_selection_previous, -- move to prev result
 						["<C-j>"] = actions.move_selection_next, -- move to next result
 						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 					},
+				},
+			},
+			pickers = {
+				find_files = {
+					hidden = true, -- Show hidden files (e.g., .github)
+					-- no_ignore = true, -- Also show files ignored by .gitignore
+				},
+				live_grep = {
+					additional_args = function()
+						return { "--hidden" } -- Include hidden files in live grep
+					end,
 				},
 			},
 		})

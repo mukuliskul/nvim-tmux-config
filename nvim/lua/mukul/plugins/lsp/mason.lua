@@ -36,18 +36,20 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
+				"ts_ls",
 				"lua_ls",
 				"pyright",
-			},
-		})
-
-		mason_tool_installer.setup({
-			ensure_installed = {
-				"ts_ls",
 				"html",
 				"cssls",
 				"tailwindcss",
 				"emmet_ls",
+				"yamlls",
+			},
+			automatic_installation = true,
+		})
+
+		mason_tool_installer.setup({
+			ensure_installed = {
 				"stylua",
 				"ruff",
 				"sonarlint-language-server",

@@ -75,7 +75,7 @@ return {
 		}
 
 		-- Set header
-		dashboard.section.header.val = doom
+		dashboard.section.header.val = basic
 
 		-- Set menu
 		dashboard.section.buttons.val = {
