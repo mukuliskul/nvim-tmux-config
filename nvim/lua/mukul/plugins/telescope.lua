@@ -6,6 +6,7 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-tree/nvim-web-devicons",
 		"folke/todo-comments.nvim",
+		"nvim-telescope/telescope-ui-select.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -24,18 +25,26 @@ return {
 			},
 			pickers = {
 				-- find_files = {
-				-- hidden = true, -- Show hidden files (e.g., .github)
+				-- 	hidden = true, -- Show hidden files (e.g., .github)
 				-- no_ignore = true, -- Also show files ignored by .gitignore
 				-- },
 				-- live_grep = {
-				-- additional_args = function()
-				-- 	return { "--hidden" } -- Include hidden files in live grep
-				-- end,
+				-- 	additional_args = function()
+				-- 		return { "--hidden" } -- Include hidden files in live grep
+				-- 	end,
 				-- },
+			},
+			extensions = {
+				["ui-select"] = {
+					require("telescope.themes").get_dropdown({
+						-- even more opts
+					}),
+				},
 			},
 		})
 
 		telescope.load_extension("fzf")
+		telescope.load_extension("ui-select")
 
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness

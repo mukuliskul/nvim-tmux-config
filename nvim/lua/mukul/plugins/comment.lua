@@ -14,10 +14,6 @@ return {
 		comment.setup({
 			-- for commenting tsx, jsx, svelte, html files
 			pre_hook = ts_context_commentstring.create_pre_hook(),
-
-			-- Custom mappings using Unimpaired
-			-- vim.api.nvim_set_keymap("n", "[c", "g{", { noremap = true, silent = true }), -- Move to previous comment
-			-- vim.api.nvim_set_keymap("n", "]c", "g}", { noremap = true, silent = true }), -- Move to next comment
 		})
 	end,
 }

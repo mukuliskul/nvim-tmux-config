@@ -42,3 +42,6 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- Enable autoread to detect external file changes
+opt.autoread = true
